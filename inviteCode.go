@@ -1,5 +1,7 @@
 package icd
 
+import "errors"
+
 var (
 	Alphabet_name = map[int32]rune{
 		0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I',
@@ -14,13 +16,18 @@ var (
 		'5': 25, '6': 26, '7': 27, '8': 28, '9': 29,
 	}
 	baseNumber int32 = 100000000
+
+	ERR_UID_MUST_GREATER_THAN_ZERO = "uid must greater than zero"
 )
 
 func MagicUID(uid int32) int32 {
 	return (uid % 10) * baseNumber
 }
 
-func Create(uid int32) string {
+func Create(uid int32) (string, error) {
+	if uid <= 0 {
+		return "", errors.New(ERR_UID_MUST_GREATER_THAN_ZERO)
+	}
 	var mod int32 = 0
 	uid += MagicUID(uid)
 	result := []rune{}
@@ -29,7 +36,7 @@ func Create(uid int32) string {
 		uid = uid / 30
 		result = append(result, Alphabet_name[mod])
 	}
-	return string(result)
+	return string(result), nil
 }
 func Decode(inviteCode string) int32 {
 	var uid int32 = 0
