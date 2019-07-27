@@ -13,8 +13,12 @@ import (
 
 func main() {
 	var uid int32 = 123456789
-	inviteCode := icd.Create(uid)
-	fmt.Println("uid:", uid, "--->", inviteCode)
+	inviteCode, err := icd.Create(uid)
+	if err != nil {
+		fmt.Println("error: ", err)
+		return
+	}
+	fmt.Println("uid:", uid, "--->", inviteCode, err)
 	fmt.Println("inviteCode:", inviteCode, "--->", icd.Decode(inviteCode))
 }
 
