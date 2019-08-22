@@ -18,7 +18,7 @@ func main() {
 		fmt.Println("error: ", err)
 		return
 	}
-	fmt.Println("uid:", uid, "--->", inviteCode, err)
+	fmt.Println("uid:", uid, "--->", inviteCode)
 	fmt.Println("inviteCode:", inviteCode, "--->", icd.Decode(inviteCode))
 }
 
