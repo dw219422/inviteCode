@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	var uid int32 = 123456789
+	var uid uint64 = 123456789
 	inviteCode, err := icd.Create(uid)
 	if err != nil {
 		fmt.Println("error: ", err)
